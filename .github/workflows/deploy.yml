@@ -42,7 +42,7 @@ jobs:
           context: ./apps/backend
           file: ./apps/backend/Dockerfile
           push: true
-          tags: yourdockerhubusername/my-game-backend:latest, yourdockerhubusername/my-game-backend:${{ github.sha }}
+          tags: muraragi/street-racing-arena-backend:latest, muraragi/street-racing-arena-backend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -67,7 +67,7 @@ jobs:
           context: ./apps/frontend
           file: ./apps/frontend/Dockerfile
           push: true
-          tags: yourdockerhubusername/my-game-frontend:latest, yourdockerhubusername/my-game-frontend:${{ github.sha }}
+          tags: muraragi/street-racing-arena-frontend:latest, muraragi/street-racing-arena-frontend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
