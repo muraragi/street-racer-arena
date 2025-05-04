@@ -1,5 +1,5 @@
 (common_routing) {
-    handle /api/* {
+    handle_path /api/* {
         reverse_proxy backend:8080
     }
     handle {
