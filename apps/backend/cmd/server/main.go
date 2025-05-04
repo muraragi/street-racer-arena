@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	"muraragi/street-racer-arena-backend/internal/database"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -31,8 +33,8 @@ func main() {
 		log.Println("Warning: Could not load .env file:", err)
 	}
 
-	ConnectDB()
-	DB.AutoMigrate(&album{})
+	database.ConnectDB()
+	database.DB.AutoMigrate(&album{})
 
 	router := gin.Default()
 
