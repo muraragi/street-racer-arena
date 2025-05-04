@@ -9,7 +9,7 @@ RUN go mod download
 COPY . .
 
 # Build statically-linked Go binary for Linux
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o main ./cmd/server/main.go
 
 # Minimal final image
 FROM alpine:latest
