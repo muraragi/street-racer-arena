@@ -41,3 +41,11 @@ To start the project locally, follow these steps:
     ```
 
 Now you should be able to access the frontend at `http://localhost:3000` and the backend API will be running at `http://localhost:8080`.
+
+## CI/CD & Production Deployment
+
+Briefly, on every push to the `main` branch:
+
+- A GitHub Actions workflow builds and pushes Docker images for the backend and frontend (only if their code changed).
+- The workflow then connects via SSH to the production server, copies over the updated `docker-compose.yml` and `Caddyfile`, pulls the new images, and restarts services with Docker Compose.
+- Unused Docker images on the server are cleaned up automatically.
