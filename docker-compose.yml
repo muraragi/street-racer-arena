@@ -1,0 +1,68 @@
+# docker-compose.yml (Example Snippet)
+version: "3.8"
+
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy_proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+
+  backend:
+    build:
+      context: ./apps/backend # Point to the backend app directory
+      dockerfile: Dockerfile # Specify the Dockerfile within that context
+    container_name: backend_app
+    restart: unless-stopped
+    expose:
+      - "8080"
+    environment:
+      - DB_HOST=postgres_db
+      - DB_PORT=5432
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_SSLMODE=disable
+      - DB_TIMEZONE=Europe/Moscow
+    depends_on:
+      - postgres_db
+    volumes:
+      - ./apps/backend:/app # Optional: Mount code for development only
+
+  frontend:
+    build:
+      context: ./apps/frontend  
+      dockerfile: Dockerfile
+    container_name: frontend_app
+    restart: unless-stopped
+    expose:
+      - "3000"
+
+  postgres_db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+
+volumes:
+  caddy_data:
+  caddy_config:
+  postgres_data:
+

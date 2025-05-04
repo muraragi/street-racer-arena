@@ -1,0 +1,13 @@
+street-racer-arena.muraragi.com {
+	handle_path /api/* {
+		reverse_proxy backend:8080
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+}
+
+www.street-racer-arena.muraragi.com {
+  redir https://street-racer-arena.muraragi.com{uri} permanent
+}

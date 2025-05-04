@@ -1,0 +1,40 @@
+# Binaries
+main
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build directories
+/build/
+bin/
+dist/
+
+# Dependency directories
+vendor/
+
+# IDE/editor files
+*.swp
+*.swo
+*.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# GORM SQLite database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Gin log files
+gin.log
+
+# Environment files
+.env
+.env.*
+
+# Coverage files
+coverage.out
