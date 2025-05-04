@@ -39,3 +39,5 @@ gin.log
 
 # Coverage files
 coverage.out
+
+tmp/

@@ -24,8 +24,6 @@ services:
     image: muraragi/street-racing-arena-backend:latest
     container_name: backend_app
     restart: unless-stopped
-    ports:
-      - "8080:8080"
     expose:
       - "8080"
     environment:
@@ -48,8 +46,6 @@ services:
     image: muraragi/street-racing-arena-frontend:latest
     container_name: frontend_app
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     expose:
       - "3000"
 
