@@ -1,9 +1,12 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 // album represents data about a record album.
@@ -22,10 +25,26 @@ var albums = []album{
 }
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Warning: Could not load .env file:", err)
+	}
+
 	ConnectDB()
 	DB.AutoMigrate(&album{})
 
 	router := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowCredentials = true
+
+	router.Use(cors.New(config))
+
+	router.GET("/", func(c *gin.Context) {
+		c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!"})
+	})
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
