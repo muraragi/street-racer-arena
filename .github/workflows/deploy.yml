@@ -114,7 +114,7 @@ jobs:
             echo "Logging into Docker Hub on server..."
             # Note: Consider alternative auth methods on server if needed (e.g., credential helper)
             # This login might not persist reliably across non-interactive sessions
-            # docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
             echo "Pulling latest images..."
             docker compose pull # Pull images defined in compose file (backend, frontend, caddy, postgres)
