@@ -10,6 +10,7 @@ main
 /build/
 bin/
 dist/
+.build
 
 # Dependency directories
 vendor/
