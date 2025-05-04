@@ -45,8 +45,11 @@ jobs:
           tags: yourdockerhubusername/my-game-backend:latest, yourdockerhubusername/my-game-backend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-        outputs:
-          built: "true"
+
+      - name: Set backend built output
+        if: steps.build_backend.outcome == 'success'
+        id: set_backend_output
+        run: echo "built=true" >> $GITHUB_OUTPUT
 
       - name: Check for frontend changes
         uses: dorny/paths-filter@v3
@@ -67,8 +70,11 @@ jobs:
           tags: yourdockerhubusername/my-game-frontend:latest, yourdockerhubusername/my-game-frontend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-        outputs:
-          built: "true"
+
+      - name: Set frontend built output
+        if: steps.build_frontend.outcome == 'success'
+        id: set_frontend_output
+        run: echo "built=true" >> $GITHUB_OUTPUT
 
   deploy:
     name: Deploy to Server
