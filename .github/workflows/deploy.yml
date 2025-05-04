@@ -9,6 +9,7 @@ jobs:
   build_and_push:
     name: Build and Push Docker Images
     runs-on: ubuntu-latest
+    environment: PROD
     outputs:
       built_backend: ${{ steps.build_backend.outputs.built }}
       built_frontend: ${{ steps.build_frontend.outputs.built }}
@@ -81,6 +82,7 @@ jobs:
     needs: build_and_push
     if: needs.build_and_push.outputs.built_backend == 'true' || needs.build_and_push.outputs.built_frontend == 'true' || github.event.head_commit.message != 'skip deploy'
     runs-on: ubuntu-latest
+    environment: PROD
 
     steps:
       - name: Checkout code
