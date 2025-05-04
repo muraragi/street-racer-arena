@@ -43,7 +43,7 @@ func main() {
 	router.Use(cors.New(config))
 
 	router.GET("/", func(c *gin.Context) {
-		c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!"})
+		c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!!"})
 	})
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)

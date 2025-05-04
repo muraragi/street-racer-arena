@@ -36,8 +36,6 @@ services:
       - DB_TIMEZONE=Europe/Moscow
     depends_on:
       - postgres_db
-    volumes:
-      - ./apps/backend:/app
 
   frontend:
     build:
