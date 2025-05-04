@@ -1,4 +1,3 @@
-# .github/workflows/deploy.yml
 name: Deploy Application
 
 on:
@@ -25,7 +24,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }} # Use an Access Token
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Check for backend changes
         uses: dorny/paths-filter@v3
@@ -96,7 +95,7 @@ jobs:
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          DEPLOY_PATH: /home/${{ secrets.SSH_USER }}/my-game-app
+          DEPLOY_PATH: ~/street-racing-arena
         run: |
           echo "Copying docker-compose.yml and Caddyfile..."
           scp docker-compose.yml Caddyfile ${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}/
@@ -107,7 +106,7 @@ jobs:
             echo "Logging into Docker Hub on server..."
             # Note: Consider alternative auth methods on server if needed (e.g., credential helper)
             # This login might not persist reliably across non-interactive sessions
-            # docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            # docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
             echo "Pulling latest images..."
             docker compose pull # Pull images defined in compose file (backend, frontend, caddy, postgres)
