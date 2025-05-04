@@ -21,6 +21,7 @@ services:
     build:
       context: ./apps/backend
       dockerfile: Dockerfile
+    image: muraragi/street-racing-arena-backend:latest
     container_name: backend_app
     restart: unless-stopped
     ports:
@@ -44,6 +45,7 @@ services:
     build:
       context: ./apps/frontend  
       dockerfile: Dockerfile
+    image: muraragi/street-racing-arena-frontend:latest
     container_name: frontend_app
     restart: unless-stopped
     ports:
