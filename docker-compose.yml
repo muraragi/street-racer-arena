@@ -24,6 +24,8 @@ services:
       dockerfile: Dockerfile # Specify the Dockerfile within that context
     container_name: backend_app
     restart: unless-stopped
+    ports:
+      - "8080:8080"
     expose:
       - "8080"
     environment:
@@ -37,7 +39,7 @@ services:
     depends_on:
       - postgres_db
     volumes:
-      - ./apps/backend:/app # Optional: Mount code for development only
+      - ./apps/backend:/app
 
   frontend:
     build:
@@ -45,6 +47,8 @@ services:
       dockerfile: Dockerfile
     container_name: frontend_app
     restart: unless-stopped
+    ports:
+      - "3000:3000"
     expose:
       - "3000"
 

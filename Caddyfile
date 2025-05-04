@@ -1,13 +1,21 @@
-street-racer-arena.muraragi.com {
-	handle_path /api/* {
-		reverse_proxy backend:8080
-	}
-
-	handle {
-		reverse_proxy frontend:3000
-	}
+(common_routing) {
+    handle_path /api/* {
+        reverse_proxy backend:8080
+    }
+    handle {
+        reverse_proxy frontend:3000
+    }
 }
 
-www.street-racer-arena.muraragi.com {
-  redir https://street-racer-arena.muraragi.com{uri} permanent
+street-racer-arena.muraragi.com {
+    import common_routing
+}
+
+localhost {
+    import common_routing
+
+    # Caddy automatically handles HTTPS for localhost using a self-signed cert
+    # Your browser will likely show a warning the first time you visit https://localhost
+    # You may need to tell your browser to trust it for local development.
+    # Alternatively, access via http://localhost
 }
