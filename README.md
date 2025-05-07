@@ -49,3 +49,20 @@ Briefly, on every push to the `main` branch:
 - A GitHub Actions workflow builds and pushes Docker images for the backend and frontend (only if their code changed).
 - The workflow then connects via SSH to the production server, copies over the updated `docker-compose.yml` and `Caddyfile`, pulls the new images, and restarts services with Docker Compose.
 - Unused Docker images on the server are cleaned up automatically.
+
+## Running Locally (Simplified)
+
+A convenience script `run_local.sh` is provided to start all necessary services (backend, frontend, and Docker containers) with a single command.
+
+1.  **Make the script executable** (only needed once):
+
+    ```bash
+    chmod +x run_local.sh
+    ```
+
+2.  **Run the script**:
+    ```bash
+    ./run_local.sh
+    ```
+
+This script uses `concurrently` (npm i -g concurrently) to run backend and frontend processes in parallel and display their logs in the same terminal window. If `concurrently` is not found, it will offer to run them sequentially.

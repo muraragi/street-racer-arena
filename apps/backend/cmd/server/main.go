@@ -28,7 +28,7 @@ var albums = []album{
 
 func main() {
 
-	err := godotenv.Load()
+	err := godotenv.Load("../../.env")
 	if err != nil {
 		log.Println("Warning: Could not load .env file:", err)
 	}
