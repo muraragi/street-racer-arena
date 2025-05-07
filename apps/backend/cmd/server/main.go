@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"muraragi/street-racer-arena-backend/internal/database"
+	"muraragi/street-racer-arena-backend/internal/models"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,8 @@ func main() {
 	database.ConnectDB()
 	database.MigrateDB()
 
+	db := database.GetDB()
+
 	router := gin.Default()
 
 	config := cors.DefaultConfig()
@@ -31,5 +34,12 @@ func main() {
 	router.GET("/", func(c *gin.Context) {
 		c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!!"})
 	})
+
+	router.GET("/cars", func(c *gin.Context) {
+		var cars []models.BaseCarModel
+		db.Find(&cars)
+		c.IndentedJSON(http.StatusOK, cars)
+	})
+
 	router.Run(":8080")
 }
