@@ -13,7 +13,7 @@ then
     log "You can typically install it with: npm install -g concurrently"
     log "Attempting to run backend and frontend sequentially. Press Ctrl+C to stop the backend and start the frontend."
     log "Starting backend with air in apps/backend..."
-    (cd apps/backend/cmd/server && air)
+    (cd apps/backend && air)
     log "Starting frontend with npm run dev in apps/frontend..."
     (cd apps/frontend && npm run dev)
 else

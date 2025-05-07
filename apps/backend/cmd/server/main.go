@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 
 	"muraragi/street-racer-arena-backend/internal/database"
 
@@ -27,5 +28,8 @@ func main() {
 
 	router.Use(cors.New(config))
 
+	router.GET("/", func(c *gin.Context) {
+		c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!!"})
+	})
 	router.Run(":8080")
 }
