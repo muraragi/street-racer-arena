@@ -2,13 +2,12 @@ package main
 
 import (
 	"log"
-	"net/http"
 
+	"muraragi/street-racer-arena-backend/internal/api"
 	"muraragi/street-racer-arena-backend/internal/database"
-	"muraragi/street-racer-arena-backend/internal/models"
+	"muraragi/street-racer-arena-backend/internal/repositories"
+	"muraragi/street-racer-arena-backend/internal/services"
 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -23,22 +22,11 @@ func main() {
 
 	db := database.GetDB()
 
-	router := gin.Default()
+	repositories := repositories.InitializeRepositories(db)
+	services := services.InitializeServices(repositories)
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"}
-	config.AllowCredentials = true
-
-	router.Use(cors.New(config))
-
-	router.GET("/", func(c *gin.Context) {
-		c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!!"})
-	})
-
-	router.GET("/cars", func(c *gin.Context) {
-		var cars []models.BaseCarModel
-		db.Find(&cars)
-		c.IndentedJSON(http.StatusOK, cars)
+	router := api.InitializeRouter(api.RouterDependencies{
+		BaseCarService: services.BaseCarService,
 	})
 
 	router.Run(":8080")
