@@ -3,6 +3,7 @@ package seeds
 import (
 	"log"
 
+	"muraragi/street-racer-arena-backend/internal/database"
 	"muraragi/street-racer-arena-backend/internal/models"
 
 	"gorm.io/gorm"
@@ -20,16 +21,24 @@ func SeedCars(db *gorm.DB) {
 		{Name: "BMW M3", BasePower: 230, BaseHandling: 145},
 	}
 
-	for _, bc := range baseCars {
-		var existing models.BaseCarModel
-		if err := db.First(&existing, "name = ?", bc.Name).Error; err == gorm.ErrRecordNotFound {
-			if err := db.Create(&bc).Error; err != nil {
-				log.Fatalf("Failed to seed base car %s: %v", bc.Name, err)
+	filteredCars := database.FilterDuplicates(
+		baseCars,
+		models.BaseCarModel{},
+		db.Model(&models.BaseCarModel{}),
+		func(item any) string {
+			if car, ok := item.(models.BaseCarModel); ok {
+				return car.Name
 			}
-			log.Printf("Seeded BaseCarModel: %s", bc.Name)
-		} else if err != nil {
-			log.Fatalf("Error checking for existing base car %s: %v", bc.Name, err)
+			return ""
+		},
+	)
+
+	if len(filteredCars) > 0 {
+		log.Printf("Unique base cars to insert: %+v\n", filteredCars)
+		if err := db.Model(&models.BaseCarModel{}).Create(&filteredCars).Error; err != nil {
+			log.Fatalf("Failed to batch seed base cars: %v", err)
 		}
+
+		log.Println("BaseCarModel seeding complete.")
 	}
-	log.Println("BaseCarModel seeding complete.")
 }

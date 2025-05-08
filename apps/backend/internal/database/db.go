@@ -83,3 +83,36 @@ func GetDB() *gorm.DB {
 	}
 	return DB
 }
+
+func FilterDuplicates[T any, K comparable, M any](
+	items []T,
+	dbModel M,
+	query *gorm.DB,
+	extractKey func(item interface{}) K,
+) []T {
+	if len(items) == 0 {
+		return items
+	}
+
+	var existingItems []M
+	if err := query.Find(&existingItems).Error; err != nil {
+		log.Printf("Error querying database in FilterDuplicates: %v", err)
+		return items
+	}
+
+	existingKeys := make(map[K]struct{})
+	for _, item := range existingItems {
+		key := extractKey(item)
+		existingKeys[key] = struct{}{}
+	}
+
+	var filteredItems []T
+	for _, item := range items {
+		key := extractKey(item)
+		if _, exists := existingKeys[key]; !exists {
+			filteredItems = append(filteredItems, item)
+		}
+	}
+
+	return filteredItems
+}
