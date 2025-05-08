@@ -9,11 +9,24 @@ A modern multiplayer street racing game platform. Race, compete, and climb the l
 
 ## 🛠️ Project Stack
 
-- **Backend:** [Go](https://golang.org/) · [Gin](https://gin-gonic.com/) · [GORM](https://gorm.io/) · [PostgreSQL](https://www.postgresql.org/)
-- **Frontend:** [Nuxt 3](https://nuxt.com/) · [Vue 3](https://vuejs.org/)
-- **Web Server/Proxy:** [Caddy](https://caddyserver.com/)
-- **Containerization:** [Docker Compose](https://docs.docker.com/compose/)
-- **CI/CD:** GitHub Actions
+- **Backend:**  
+  [![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white&style=for-the-badge)](https://golang.org/)
+  [![Gin](https://img.shields.io/badge/Gin-00B386?logo=go&logoColor=white&style=for-the-badge)](https://gin-gonic.com/)
+  [![GORM](https://img.shields.io/badge/GORM-FF7043?logo=go&logoColor=white&style=for-the-badge)](https://gorm.io/)
+  [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)](https://www.postgresql.org/)
+
+- **Frontend:**  
+  [![Nuxt 3](https://img.shields.io/badge/Nuxt_3-00DC82?logo=nuxt.js&logoColor=white&style=for-the-badge)](https://nuxt.com/)
+  [![Vue 3](https://img.shields.io/badge/Vue_3-4FC08D?logo=vue.js&logoColor=white&style=for-the-badge)](https://vuejs.org/)
+
+- **Web Server/Proxy:**  
+  [![Caddy](https://img.shields.io/badge/Caddy-00C7B7?logo=caddy&logoColor=white&style=for-the-badge)](https://caddyserver.com/)
+
+- **Containerization:**  
+  [![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white&style=for-the-badge)](https://docs.docker.com/compose/)
+
+- **CI/CD:**  
+  [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white&style=for-the-badge)](https://github.com/features/actions)
 
 ---
 
