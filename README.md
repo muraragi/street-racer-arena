@@ -16,7 +16,7 @@ A modern multiplayer street racing game platform. Race, compete, and climb the l
   [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=rounded)](https://www.postgresql.org/)
 
 - **Frontend:**  
-  [![Nuxt 3](https://img.shields.io/badge/Nuxt_3-00DC82?logo=nuxt.js&logoColor=white&style=rounded)](https://nuxt.com/)
+  [[![Nuxt](https://img.shields.io/badge/Nuxt-002E3B?logo=nuxt&logoColor=#00DC82)](https://nuxt.com/)
   [![Vue 3](https://img.shields.io/badge/Vue_3-4FC08D?logo=vue.js&logoColor=white&style=rounded)](https://vuejs.org/)
 
 - **Web Server/Proxy:**  
