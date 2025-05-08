@@ -1,68 +1,80 @@
-# W I P
+# 🚗 Street Racing Arena
 
-## Local Development
+[![CI/CD](https://github.com/your-org/street-racing-arena/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/street-racing-arena/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-To start the project locally, follow these steps:
+A modern multiplayer street racing game platform. Race, compete, and climb the leaderboards! Built with a robust Go backend and a sleek Nuxt 3 frontend.
 
-1.  **Start PostgreSQL Database:**
-    Navigate to the `backend` directory and run Docker Compose:
+---
 
-    ```bash
-    cd backend
-    docker compose up -d
-    ```
+## 🛠️ Project Stack
 
-2.  **Install Backend Dependencies:**
-    Still in the `backend` directory, install the necessary dependencies:
+- **Backend:** [Go](https://golang.org/) · [Gin](https://gin-gonic.com/) · [GORM](https://gorm.io/) · [PostgreSQL](https://www.postgresql.org/)
+- **Frontend:** [Nuxt 3](https://nuxt.com/) · [Vue 3](https://vuejs.org/)
+- **Web Server/Proxy:** [Caddy](https://caddyserver.com/)
+- **Containerization:** [Docker Compose](https://docs.docker.com/compose/)
+- **CI/CD:** GitHub Actions
 
-    ```bash
-    go mod tidy
-    ```
+---
 
-3.  **Run Backend Server:**
-    Use `air` to run the backend server with live reloading:
+## 🚀 Getting Started (Local Development)
 
-    ```bash
-    air
-    ```
+Follow these steps to run the project locally:
 
-4.  **Install Frontend Dependencies:**
-    Navigate to the `frontend` directory and install the required packages:
+1. **Start PostgreSQL Database:**
+   ```bash
+   cd apps/backend
+   docker compose up -d
+   ```
+2. **Install Backend Dependencies:**
+   ```bash
+   go mod tidy
+   ```
+3. **Run Backend Server (with live reload):**
+   ```bash
+   air
+   ```
+4. **Install Frontend Dependencies:**
+   ```bash
+   cd ../../frontend
+   npm install
+   ```
+5. **Run Frontend Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-    ```bash
-    cd ../frontend
-    npm install
-    ```
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:8080](http://localhost:8080)
 
-5.  **Run Frontend Development Server:**
-    Start the frontend development server:
-    ```bash
-    npm run dev
-    ```
+---
 
-Now you should be able to access the frontend at `http://localhost:3000` and the backend API will be running at `http://localhost:8080`.
+## 🐳 One-Command Local Run
 
-## CI/CD & Production Deployment
+A convenience script `run_local.sh` is provided to start all services (backend, frontend, and Docker containers) with a single command.
 
-Briefly, on every push to the `main` branch:
+1. **Make the script executable** (only needed once):
+   ```bash
+   chmod +x run_local.sh
+   ```
+2. **Run the script:**
+   ```bash
+   ./run_local.sh
+   ```
 
-- A GitHub Actions workflow builds and pushes Docker images for the backend and frontend (only if their code changed).
-- The workflow then connects via SSH to the production server, copies over the updated `docker-compose.yml` and `Caddyfile`, pulls the new images, and restarts services with Docker Compose.
-- Unused Docker images on the server are cleaned up automatically.
+> This script uses [`concurrently`](https://www.npmjs.com/package/concurrently) to run backend and frontend processes in parallel. If not installed, it will offer to run them sequentially.
 
-## Running Locally (Simplified)
+---
 
-A convenience script `run_local.sh` is provided to start all necessary services (backend, frontend, and Docker containers) with a single command.
+## 🚢 CI/CD & Production Deployment
 
-1.  **Make the script executable** (only needed once):
+- On every push to the `main` branch:
+  - GitHub Actions builds and pushes Docker images for backend and frontend (only if their code changed).
+  - The workflow connects via SSH to the production server, updates `docker-compose.yml` and `Caddyfile`, pulls new images, and restarts services.
+  - Unused Docker images are cleaned up automatically.
 
-    ```bash
-    chmod +x run_local.sh
-    ```
+---
 
-2.  **Run the script**:
-    ```bash
-    ./run_local.sh
-    ```
+## 📄 License
 
-This script uses `concurrently` (npm i -g concurrently) to run backend and frontend processes in parallel and display their logs in the same terminal window. If `concurrently` is not found, it will offer to run them sequentially.
+This project is licensed under the MIT License.
