@@ -1,6 +1,6 @@
 # 🚗 Street Racing Arena
 
-[![Deploy Application](https://github.com/muraragi/street-racing-arena/actions/workflows/deploy.yml/badge.svg)](https://github.com/muraragi/street-racing-arena/actions/workflows/deploy.yml)
+[![CI/CD](https://github.com/muraragi/street-racing-arena/actions/workflows/deploy.yml/badge.svg)](https://github.com/muraragi/street-racing-arena/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A modern multiplayer street racing game platform. Race, compete, and climb the leaderboards! Built with a robust Go backend and a sleek Nuxt 3 frontend.
