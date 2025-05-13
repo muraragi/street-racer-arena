@@ -6,10 +6,12 @@ import (
 
 type Services struct {
 	BaseCarService BaseCarService
+	UserService    UserService
 }
 
 func InitializeServices(repositories *repositories.Repositories) *Services {
 	return &Services{
 		BaseCarService: NewBaseCarService(repositories.BaseCarRepository),
+		UserService:    NewUserService(repositories.UserRepository),
 	}
 }

@@ -9,6 +9,7 @@ import (
 
 type RouterDependencies struct {
 	BaseCarService services.BaseCarService
+	UserService    services.UserService
 }
 
 func InitializeRouter(dependencies RouterDependencies) *gin.Engine {
@@ -27,6 +28,7 @@ func InitializeRouter(dependencies RouterDependencies) *gin.Engine {
 	})
 
 	SetupBaseCarRoutes(router, dependencies.BaseCarService)
+	SetupAuthRoutes(router, dependencies.UserService)
 
 	return router
 }

@@ -34,6 +34,8 @@ services:
       - DB_NAME=${POSTGRES_DB}
       - DB_SSLMODE=disable
       - DB_TIMEZONE=Europe/Moscow
+      - GOOGLE_OAUTH_CLIENT_ID=${GOOGLE_OAUTH_CLIENT_ID}
+      - GOOGLE_OAUTH_CLIENT_SECRET=${GOOGLE_OAUTH_CLIENT_SECRET}
     depends_on:
       - postgres_db
 

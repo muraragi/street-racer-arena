@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"muraragi/street-racer-arena-backend/internal/auth"
 	"muraragi/street-racer-arena-backend/internal/database"
 	"muraragi/street-racer-arena-backend/internal/seeds"
 
@@ -19,6 +20,8 @@ func main() {
 
 	database.ConnectDB()
 	database.MigrateDB()
+
+	auth.InitializeAuth()
 
 	db := database.GetDB()
 	seeds.SeedCars(db)
