@@ -1,7 +1,11 @@
+<script lang="ts" setup>
+useHead({
+  bodyAttrs: {
+    class: 'dark'
+  }
+})
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-    <h1>xoxo</h1>
-  </div>
+  <NuxtPage />
 </template>
