@@ -11,6 +11,7 @@ console.log('API Error:', error.value)
 
 <template>
   <div class="p-12 flex flex-col gap-4">
+    {{ config.public.apiUrl }}
     <NuxtLink to="/enter">
       <Button class="w-3xs">Enter</Button>
     </NuxtLink>
