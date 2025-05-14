@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 const config = useRuntimeConfig()
-const { data, pending } = useFetch(`${config.public.apiUrl}/user`, {
-  method: 'GET'
+const { data, pending, error } = useFetch(`${config.public.apiUrl}/user`, {
+  method: 'GET',
+  credentials: 'include'
 })
+
+console.log('API Response:', data.value)
+console.log('API Error:', error.value)
 </script>
 
 <template>
