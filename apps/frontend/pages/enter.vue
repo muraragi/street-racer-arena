@@ -11,7 +11,7 @@ const config = useRuntimeConfig()
         <CardDescription> Sign in to your account using Google. </CardDescription>
       </CardHeader>
       <CardContent>
-        <a :href="`${config.public.apiUrl}/auth/login`" target="_blank">
+        <a :href="`${config.public.apiUrl}/auth/login`">
           <Button class="w-full flex items-center gap-2" variant="outline">
             <Google />
             Sign in with Google

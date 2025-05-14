@@ -18,7 +18,7 @@ console.log('API Error:', error.value)
       <Button class="w-3xs">Enter</Button>
     </NuxtLink>
 
-    <a :href="`${config.public.apiUrl}/auth/logout`" target="_blank">
+    <a :href="`${config.public.apiUrl}/auth/logout`">
       <Button class="w-3xs" variant="outline"> Logout </Button>
     </a>
 
