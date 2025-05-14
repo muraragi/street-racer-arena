@@ -24,6 +24,14 @@ func NewAuthHandler(userService services.UserService) AuthHandler {
 }
 
 func (h *authHandler) BeginAuth(c *gin.Context) {
+	redirectURL := c.Query("redirect_url")
+
+	if redirectURL == "" {
+		redirectURL = "/"
+	}
+
+	gothic.StoreInSession("redirect_url", redirectURL, c.Request, c.Writer)
+
 	if gothUser, authErr := gothic.CompleteUserAuth(c.Writer, c.Request); authErr == nil {
 		user, err := h.userService.GetUserFromSession(gothUser)
 
@@ -52,11 +60,13 @@ func (h *authHandler) AuthCallback(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Logged in", "user": user})
+
+	redirectURL, _ := gothic.GetFromSession("redirect_url", c.Request)
+	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 }
 
 func (h *authHandler) Logout(c *gin.Context) {
 	gothic.Logout(c.Writer, c.Request)
 
-	c.Header("Location", "/")
-	c.Status(http.StatusTemporaryRedirect)
+	c.Redirect(http.StatusTemporaryRedirect, "/")
 }
