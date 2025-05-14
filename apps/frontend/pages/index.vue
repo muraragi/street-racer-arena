@@ -29,7 +29,7 @@ const {
         <AlertDescription> Become a street racing king </AlertDescription>
       </Alert>
 
-      <NuxtLink v-if="!user" to="/enter">
+      <NuxtLink v-if="!user" class="w-fit" to="/enter">
         <Button>Enter</Button>
       </NuxtLink>
     </template>
@@ -85,7 +85,7 @@ const {
           </div>
         </CardContent>
       </Card>
-      <a :href="`${config.public.apiUrl}/auth/logout?redirect_url=${url}`">
+      <a :href="`${config.public.apiUrl}/auth/logout?redirect_url=${url}`" class="w-fit">
         <Button variant="outline"> Leave the race </Button>
       </a>
     </template>
