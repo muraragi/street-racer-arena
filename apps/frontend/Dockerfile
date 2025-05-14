@@ -21,5 +21,4 @@ COPY --from=builder /app/nuxt.config.ts ./nuxt.config.ts
 
 EXPOSE 3000
 
-# Command to start the Nuxt production server
 CMD ["node", ".output/server/index.mjs"]

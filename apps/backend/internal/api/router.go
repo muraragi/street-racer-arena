@@ -20,11 +20,14 @@ func InitializeRouter(dependencies RouterDependencies) *gin.Engine {
 	router := gin.Default()
 
 	config := cors.Config{
-		AllowAllOrigins:  true,
-		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization", "X-Requested-With", "X-CSRF-Token", "Your-Custom-Header-If-Any"}, // Be very broad
-		ExposeHeaders:    []string{"Content-Length", "street_racer_session", "Authorization"},
+		AllowOrigins: []string{
+			"http://localhost:3000",
+			"https://street-racing-arena.muraragi.com",
+		},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		AllowCredentials: true,
+		ExposeHeaders:    []string{"Content-Length"},
 		MaxAge:           12 * time.Hour,
 	}
 

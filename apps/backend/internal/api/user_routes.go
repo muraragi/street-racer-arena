@@ -14,6 +14,7 @@ func SetupUserRoutes(router *gin.Engine, userService services.UserService) {
 	userRoutes := router.Group("/user")
 	userRoutes.Use(middleware.GoogleAuthProvider())
 	userRoutes.Use(middleware.AuthProvider())
+	userRoutes.Use(middleware.Auth())
 	{
 		userRoutes.GET("/", userHandler.UserInfo)
 	}

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const config = useRuntimeConfig()
-const { data, pending, error } = useFetch(`${config.public.apiUrl}/user`, {
+const { data, pending, error } = useFetch(`${config.public.apiUrl}/user/`, {
   method: 'GET',
   credentials: 'include'
 })
@@ -15,6 +15,10 @@ console.log('API Error:', error.value)
     <NuxtLink to="/enter">
       <Button class="w-3xs">Enter</Button>
     </NuxtLink>
+
+    <a :href="`${config.public.apiUrl}/auth/logout`" target="_blank">
+      <Button class="w-3xs" variant="outline"> Logout </Button>
+    </a>
 
     <Card class="w-[350px]">
       <CardHeader>
