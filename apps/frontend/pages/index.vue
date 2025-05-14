@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+const headers = useRequestHeaders(['cookie'])
 const config = useRuntimeConfig()
 const { data, pending, error } = useFetch(`${config.public.apiUrl}/user/`, {
   method: 'GET',
-  credentials: 'include'
+  credentials: 'include',
+  headers
 })
 
 console.log('API Response:', data.value)
