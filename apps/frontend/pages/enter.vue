@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Google from '~/components/custom-icons/google.vue'
 const config = useRuntimeConfig()
-const route = useRoute()
+const url = useRequestURL()
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const route = useRoute()
         <CardDescription> Sign in to your account using Google. </CardDescription>
       </CardHeader>
       <CardContent>
-        <a :href="`${config.public.apiUrl}/auth/login?redirect_url=${route.fullPath}`">
+        <a :href="`${config.public.apiUrl}/auth/login?redirect_url=${url}`">
           <Button class="w-full flex items-center gap-2" variant="outline">
             <Google />
             Sign in with Google
