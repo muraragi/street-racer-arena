@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Google from '~/components/custom-icons/google.vue'
 const config = useRuntimeConfig()
-const { data, pending } = useFetch(`${config.public.apiUrl}/user`)
 </script>
 
 <template>
@@ -22,11 +21,6 @@ const { data, pending } = useFetch(`${config.public.apiUrl}/user`)
           </Button>
         </a>
       </CardContent>
-      <CardFooter>
-        <p>
-          {{ pending ? 'Loading...' : data }}
-        </p>
-      </CardFooter>
     </Card>
   </div>
 </template>

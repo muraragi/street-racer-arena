@@ -12,7 +12,7 @@ func SetupAuthRoutes(router *gin.Engine, userService services.UserService) {
 	authHandler := handlers.NewAuthHandler(userService)
 
 	authRoutes := router.Group("/auth")
-	authRoutes.Use(middleware.AuthProvider())
+	authRoutes.Use(middleware.GoogleAuthProvider())
 	{
 		authRoutes.GET("/login", authHandler.BeginAuth)
 		authRoutes.GET("/logout", authHandler.Logout)

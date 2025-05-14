@@ -1,9 +1,12 @@
 package api
 
 import (
+	"muraragi/street-racer-arena-backend/internal/auth"
+	"muraragi/street-racer-arena-backend/internal/middleware"
 	"muraragi/street-racer-arena-backend/internal/services"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,6 +23,11 @@ func InitializeRouter(dependencies RouterDependencies) *gin.Engine {
 	config.AllowCredentials = true
 
 	router.Use(cors.New(config))
+
+	store := auth.GetSessionStore()
+
+	router.Use(sessions.Sessions("street_racer_session", store))
+	router.Use(middleware.CurrentUser(dependencies.UserService))
 
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{

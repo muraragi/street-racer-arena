@@ -1,4 +1,7 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const config = useRuntimeConfig()
+const { data, pending } = useFetch(`${config.public.apiUrl}/user`)
+</script>
 
 <template>
   <div class="p-12 flex flex-col gap-4">
@@ -40,5 +43,9 @@
         <Button>Deploy</Button>
       </CardFooter>
     </Card>
+
+    <p>
+      {{ pending ? 'Loading...' : data }}
+    </p>
   </div>
 </template>

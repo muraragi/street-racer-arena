@@ -2,9 +2,11 @@ package handlers
 
 import (
 	"fmt"
-	"muraragi/street-racer-arena-backend/internal/services"
 	"net/http"
 
+	"muraragi/street-racer-arena-backend/internal/services"
+
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/markbates/goth/gothic"
 )
@@ -23,17 +25,17 @@ func NewAuthHandler(userService services.UserService) AuthHandler {
 	return &authHandler{userService: userService}
 }
 
-func (h *authHandler) BeginAuth(c *gin.Context) {
-	redirectURL := c.Query("redirect_url")
+var redirectURL string
 
+func (h *authHandler) BeginAuth(c *gin.Context) {
+	redirectURL = c.Query("redirect_url")
 	if redirectURL == "" {
 		redirectURL = "http://localhost:3000"
 	}
 
-	gothic.StoreInSession("redirect_url", redirectURL, c.Request, c.Writer)
-
 	if _, authErr := gothic.CompleteUserAuth(c.Writer, c.Request); authErr == nil {
 		c.Redirect(http.StatusTemporaryRedirect, redirectURL)
+		return
 	}
 
 	gothic.BeginAuthHandler(c.Writer, c.Request)
@@ -46,19 +48,37 @@ func (h *authHandler) AuthCallback(c *gin.Context) {
 		return
 	}
 
-	_, err = h.userService.CreateUser(gothUser)
+	user, err := h.userService.CreateUser(gothUser)
 	if err != nil {
 		fmt.Fprintln(c.Writer, err)
 		return
 	}
 
-	redirectURL, _ := gothic.GetFromSession("redirect_url", c.Request)
+	session := sessions.Default(c)
+	session.Set("user_id", user.ID)
+	session.Set("provider", gothUser.Provider)
+	session.Set("provider_id", gothUser.UserID)
+	session.Set("username", user.Username)
+	session.Set("avatar_url", user.AvatarURL)
+	session.Save()
+
+	if redirectURL == "" {
+		redirectURL = "http://localhost:3000"
+	}
 
 	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 }
 
 func (h *authHandler) Logout(c *gin.Context) {
+	session := sessions.Default(c)
+	session.Clear()
+	session.Save()
+
 	gothic.Logout(c.Writer, c.Request)
 
-	c.Redirect(http.StatusTemporaryRedirect, "http://localhost:3000")
+	if redirectURL == "" {
+		redirectURL = "http://localhost:3000"
+	}
+
+	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 }

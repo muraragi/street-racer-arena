@@ -11,6 +11,7 @@ import (
 type UserService interface {
 	CreateUser(user goth.User) (*models.User, error)
 	GetUserFromSession(user goth.User) (*models.User, error)
+	GetUserByID(id uint) (*models.User, error)
 }
 
 type userService struct {
@@ -47,6 +48,14 @@ func (s *userService) GetUserFromSession(gothUser goth.User) (*models.User, erro
 	user, err := s.userRepository.FindByProvider(gothUser.Provider, gothUser.UserID)
 	if err != nil {
 		return nil, fmt.Errorf("error getting user from session: %w", err)
+	}
+	return user, nil
+}
+
+func (s *userService) GetUserByID(id uint) (*models.User, error) {
+	user, err := s.userRepository.GetByID(id)
+	if err != nil {
+		return nil, fmt.Errorf("error getting user by ID: %w", err)
 	}
 	return user, nil
 }

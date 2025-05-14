@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AuthProvider() gin.HandlerFunc {
+func GoogleAuthProvider() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		q := c.Request.URL.Query()
 

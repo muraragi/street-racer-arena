@@ -25,9 +25,6 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 func (r *userRepository) FindByProvider(providerName string, providerUserID string) (*models.User, error) {
 	var user models.User
 	if err := r.DB.Where("provider = ? AND provider_id = ?", providerName, providerUserID).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
 		return nil, err
 	}
 	return &user, nil
