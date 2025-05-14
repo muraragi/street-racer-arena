@@ -2,7 +2,9 @@
 
 <template>
   <div class="p-12 flex flex-col gap-4">
-    <Button class="w-3xs">Click me</Button>
+    <NuxtLink to="/enter">
+      <Button class="w-3xs">Enter</Button>
+    </NuxtLink>
 
     <Card class="w-[350px]">
       <CardHeader>

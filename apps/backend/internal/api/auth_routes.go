@@ -15,6 +15,7 @@ func SetupAuthRoutes(router *gin.Engine, userService services.UserService) {
 	authRoutes.Use(middleware.AuthProvider())
 	{
 		authRoutes.GET("/login", authHandler.BeginAuth)
+		authRoutes.GET("/logout", authHandler.Logout)
 		authRoutes.GET("/google/callback", authHandler.AuthCallback)
 	}
 }
