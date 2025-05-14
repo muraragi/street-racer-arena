@@ -5,6 +5,8 @@ import type { User } from '~/models/user'
 const headers = useRequestHeaders(['cookie'])
 const config = useRuntimeConfig()
 
+const route = useRoute()
+
 const {
   data: user,
   pending,
@@ -83,7 +85,7 @@ const {
           </div>
         </CardContent>
       </Card>
-      <a :href="`${config.public.apiUrl}/auth/logout`">
+      <a :href="`${config.public.apiUrl}/auth/logout?redirect_url=${route.fullPath}`">
         <Button variant="outline"> Leave the race </Button>
       </a>
     </template>

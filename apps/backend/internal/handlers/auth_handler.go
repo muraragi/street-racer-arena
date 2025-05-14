@@ -25,15 +25,14 @@ func NewAuthHandler(userService services.UserService) AuthHandler {
 	return &authHandler{userService: userService}
 }
 
-var redirectURL string
-
 func (h *authHandler) BeginAuth(c *gin.Context) {
-	redirectURL = c.Query("redirect_url")
-	if redirectURL == "" {
-		redirectURL = "http://localhost:3000"
-	}
+	redirectURL := c.Query("redirect_url")
 
 	if _, authErr := gothic.CompleteUserAuth(c.Writer, c.Request); authErr == nil {
+		if redirectURL == "" {
+			redirectURL = "https://street-racing-arena.muraragi.com"
+		}
+
 		c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 		return
 	}
@@ -62,14 +61,12 @@ func (h *authHandler) AuthCallback(c *gin.Context) {
 	session.Set("avatar_url", user.AvatarURL)
 	session.Save()
 
-	if redirectURL == "" {
-		redirectURL = "http://localhost:3000"
-	}
-
-	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
+	c.Redirect(http.StatusTemporaryRedirect, "https://street-racing-arena.muraragi.com")
 }
 
 func (h *authHandler) Logout(c *gin.Context) {
+	redirectURL := c.Query("redirect_url")
+
 	session := sessions.Default(c)
 	session.Clear()
 	session.Save()
@@ -77,7 +74,7 @@ func (h *authHandler) Logout(c *gin.Context) {
 	gothic.Logout(c.Writer, c.Request)
 
 	if redirectURL == "" {
-		redirectURL = "http://localhost:3000"
+		redirectURL = "https://street-racing-arena.muraragi.com"
 	}
 
 	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
