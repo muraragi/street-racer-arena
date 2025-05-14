@@ -7,8 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CurrentUser middleware loads the current user from the session
-// and adds it to the context
 func CurrentUser(userService services.UserService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
@@ -19,7 +17,6 @@ func CurrentUser(userService services.UserService) gin.HandlerFunc {
 			return
 		}
 
-		// Convert userID to uint
 		id, ok := userID.(uint)
 		if !ok {
 			c.Next()

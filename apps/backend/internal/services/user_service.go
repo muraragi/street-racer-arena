@@ -10,7 +10,6 @@ import (
 
 type UserService interface {
 	CreateUser(user goth.User) (*models.User, error)
-	GetUserFromSession(user goth.User) (*models.User, error)
 	GetUserByID(id uint) (*models.User, error)
 }
 
@@ -42,14 +41,6 @@ func (s *userService) CreateUser(gothUser goth.User) (*models.User, error) {
 		return nil, fmt.Errorf("error creating user: %w", err)
 	}
 
-	return user, nil
-}
-
-func (s *userService) GetUserFromSession(gothUser goth.User) (*models.User, error) {
-	user, err := s.userRepository.FindByProvider(gothUser.Provider, gothUser.UserID)
-	if err != nil {
-		return nil, fmt.Errorf("error getting user from session: %w", err)
-	}
 	return user, nil
 }
 
