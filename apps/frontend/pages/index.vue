@@ -7,6 +7,14 @@ const config = useRuntimeConfig()
 
 const url = useRequestURL()
 
+useSeoMeta({
+  title: 'Street Racing Arena - Home',
+  description: 'Join the ultimate street racing competition and become a legend.',
+  ogTitle: 'Street Racing Arena - Join the Competition',
+  ogDescription:
+    'Register for Street Racing Arena, compete with others, and become the racing king.'
+})
+
 const {
   data: user,
   pending,
@@ -25,12 +33,12 @@ const {
     <template v-if="!user">
       <Alert class="w-80">
         <CarFront class="!w-5 !h-5" />
-        <AlertTitle>Enter the race</AlertTitle>
-        <AlertDescription> Become a street racing king </AlertDescription>
+        <AlertTitle>Join the waiting list</AlertTitle>
+        <AlertDescription> To become a street racing king </AlertDescription>
       </Alert>
 
       <NuxtLink v-if="!user" class="w-fit" to="/enter">
-        <Button>Enter</Button>
+        <Button>Join</Button>
       </NuxtLink>
     </template>
 

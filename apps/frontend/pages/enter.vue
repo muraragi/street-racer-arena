@@ -2,6 +2,14 @@
 import Google from '~/components/custom-icons/google.vue'
 const config = useRuntimeConfig()
 const url = useRequestURL()
+
+useSeoMeta({
+  title: 'Join Street Racing Arena - Sign In',
+  description: 'Sign in to your Street Racing Arena account and start competing.',
+  ogTitle: 'Street Racing Arena - Sign In',
+  ogDescription: 'Sign in to your account and join the ultimate racing competition.',
+  ogImage: '/images/street-racing-login.jpg'
+})
 </script>
 
 <template>

@@ -17,6 +17,12 @@ export default defineNuxtConfig({
       apiUrl: ''
     }
   },
+  site: {
+    url: 'https://street-racing-arena.muraragi.com',
+    name: 'Street Racing Arena',
+    description: 'Become the street racing king in this competitive arena',
+    defaultLocale: 'en'
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
