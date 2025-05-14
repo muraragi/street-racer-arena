@@ -60,13 +60,20 @@ const {
           </CardTitle>
         </CardHeader>
         <CardContent class="flex items-center gap-6">
-          <NuxtImg
-            :alt="user.AvatarURL"
-            :src="user.AvatarURL"
-            class="w-[120px] h-[150px] object-cover"
-            height="100"
-            width="100"
-          />
+          <div
+            class="relative w-[120px] h-[150px] overflow-hidden border-2 rounded-lg border-purple-500 shadow-lg"
+          >
+            <NuxtImg
+              :alt="user.AvatarURL"
+              :src="user.AvatarURL"
+              class="w-full h-full object-cover transition-transform hover:scale-110 duration-300"
+              height="100"
+              width="100"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent pointer-events-none"
+            />
+          </div>
           <div class="flex flex-col text-gray-400 gap-1">
             <span class="text-2xl font-bold text-primary-foreground">{{ user.Username }}</span>
             <span class="text-xs mt-1">Mail: {{ user.Email }}</span>
