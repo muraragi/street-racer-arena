@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const config = useRuntimeConfig()
-const { data, pending } = useFetch(`${config.public.apiUrl}/user`)
+const { data, pending } = useFetch(`${config.public.apiUrl}/user`, {
+  method: 'GET'
+})
 </script>
 
 <template>
