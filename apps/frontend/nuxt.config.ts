@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  // ssr: false,
   modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/fonts', 'shadcn-nuxt', '@nuxtjs/seo'],
   fonts: {
     families: [
@@ -11,6 +12,11 @@ export default defineNuxtConfig({
         provider: 'google'
       }
     ]
+  },
+  runtimeConfig: {
+    public: {
+      apiUrl: 'http://localhost:8080'
+    }
   },
   shadcn: {
     /**

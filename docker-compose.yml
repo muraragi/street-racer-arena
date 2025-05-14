@@ -43,6 +43,8 @@ services:
     build:
       context: ./apps/frontend  
       dockerfile: Dockerfile
+    environment:
+      - API_URL=${API_URL}
     image: muraragi/street-racing-arena-frontend:latest
     container_name: frontend_app
     restart: unless-stopped

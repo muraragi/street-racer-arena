@@ -27,20 +27,13 @@ func (h *authHandler) BeginAuth(c *gin.Context) {
 	redirectURL := c.Query("redirect_url")
 
 	if redirectURL == "" {
-		redirectURL = "/"
+		redirectURL = "http://localhost:3000"
 	}
 
 	gothic.StoreInSession("redirect_url", redirectURL, c.Request, c.Writer)
 
-	if gothUser, authErr := gothic.CompleteUserAuth(c.Writer, c.Request); authErr == nil {
-		user, err := h.userService.GetUserFromSession(gothUser)
-
-		if err != nil {
-			fmt.Fprintln(c.Writer, err)
-			return
-		}
-
-		c.JSON(http.StatusOK, gin.H{"message": "Logged in", "user": user})
+	if _, authErr := gothic.CompleteUserAuth(c.Writer, c.Request); authErr == nil {
+		c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 	}
 
 	gothic.BeginAuthHandler(c.Writer, c.Request)
@@ -53,20 +46,19 @@ func (h *authHandler) AuthCallback(c *gin.Context) {
 		return
 	}
 
-	user, err := h.userService.CreateUser(gothUser)
+	_, err = h.userService.CreateUser(gothUser)
 	if err != nil {
 		fmt.Fprintln(c.Writer, err)
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Logged in", "user": user})
-
 	redirectURL, _ := gothic.GetFromSession("redirect_url", c.Request)
+
 	c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 }
 
 func (h *authHandler) Logout(c *gin.Context) {
 	gothic.Logout(c.Writer, c.Request)
 
-	c.Redirect(http.StatusTemporaryRedirect, "/")
+	c.Redirect(http.StatusTemporaryRedirect, "http://localhost:3000")
 }
