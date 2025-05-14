@@ -1,64 +1,84 @@
 <script lang="ts" setup>
+import { CarFront } from 'lucide-vue-next'
+import type { User } from '~/models/user'
+
 const headers = useRequestHeaders(['cookie'])
 const config = useRuntimeConfig()
-const { data, pending, error } = useFetch(`${config.public.apiUrl}/user/`, {
+
+const {
+  data: user,
+  pending,
+  error
+} = useFetch<User>(`${config.public.apiUrl}/user/`, {
   method: 'GET',
   credentials: 'include',
   headers
 })
-
-console.log('API Response:', data.value)
-console.log('API Error:', error.value)
 </script>
 
 <template>
   <div class="p-12 flex flex-col gap-4">
-    {{ config.public.apiUrl }}
-    <NuxtLink to="/enter">
-      <Button class="w-3xs">Enter</Button>
-    </NuxtLink>
+    <Skeleton v-if="pending" class="max-w-[400px] h-[100px]" />
 
-    <a :href="`${config.public.apiUrl}/auth/logout`">
-      <Button class="w-3xs" variant="outline"> Logout </Button>
-    </a>
+    <template v-if="!user">
+      <Alert class="w-80">
+        <CarFront class="!w-5 !h-5" />
+        <AlertTitle>Enter the race</AlertTitle>
+        <AlertDescription> Become a street racing king </AlertDescription>
+      </Alert>
 
-    <Card class="w-[350px]">
-      <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div class="grid items-center w-full gap-4">
-            <div class="flex flex-col space-y-1.5">
-              <Label for="name">Name</Label>
-              <Input id="name" placeholder="Name of your project" />
-            </div>
-            <div class="flex flex-col space-y-1.5">
-              <Label for="framework">Framework</Label>
-              <Select>
-                <SelectTrigger id="framework" class="w-full">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="nuxt"> Nuxt </SelectItem>
-                  <SelectItem value="next"> Next.js </SelectItem>
-                  <SelectItem value="sveltekit"> SvelteKit </SelectItem>
-                  <SelectItem value="astro"> Astro </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+      <NuxtLink v-if="!user" to="/enter">
+        <Button>Enter</Button>
+      </NuxtLink>
+    </template>
+
+    <Alert v-else-if="error" class="w-80">
+      <AlertTitle>Error</AlertTitle>
+      <AlertDescription>
+        {{ error.message }}
+      </AlertDescription>
+    </Alert>
+
+    <template v-else>
+      <Card class="max-w-[420px] !gap-1 !pt-4 !pb-6">
+        <CardHeader>
+          <CardTitle class="flex items-center pl-1 gap-12">
+            <span
+              class="text-3xl font-extrabold uppercase"
+              style="
+                color: #d600ff;
+                text-shadow:
+                  0 0 2px #d600ff,
+                  0 0 4px #d600ff,
+                  0 0 8px #8f00ff;
+                letter-spacing: 0.1em;
+              "
+            >
+              STREET
+            </span>
+            <span class="text-base font-semibold uppercase"> RACING LICENSE </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="flex items-center gap-6">
+          <NuxtImg
+            :alt="user.AvatarURL"
+            :src="user.AvatarURL"
+            class="w-[120px] h-[150px] object-cover"
+            height="100"
+            width="100"
+          />
+          <div class="flex flex-col text-gray-400 gap-1">
+            <span class="text-2xl font-bold text-primary-foreground">{{ user.Username }}</span>
+            <span class="text-xs mt-1">Mail: {{ user.Email }}</span>
+            <span class="text-xs">Races: {{ user.TotalRaces }}</span>
+            <span class="text-xs">Wins: {{ user.RacesWon }}</span>
+            <span class="text-xs">Score: {{ user.Score }}</span>
           </div>
-        </form>
-      </CardContent>
-      <CardFooter class="flex justify-between px-6">
-        <Button variant="outline"> Cancel </Button>
-        <Button>Deploy</Button>
-      </CardFooter>
-    </Card>
-
-    <p>
-      {{ pending ? 'Loading...' : data }}
-    </p>
+        </CardContent>
+      </Card>
+      <a :href="`${config.public.apiUrl}/auth/logout`">
+        <Button variant="outline"> Leave the race </Button>
+      </a>
+    </template>
   </div>
 </template>

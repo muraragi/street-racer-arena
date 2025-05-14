@@ -31,7 +31,8 @@ func (s *userService) CreateUser(gothUser goth.User) (*models.User, error) {
 	user = &models.User{
 		Provider:   gothUser.Provider,
 		ProviderID: gothUser.UserID,
-		Username:   gothUser.Name,
+		Username:   gothUser.NickName,
+		Email:      gothUser.Email,
 		AvatarURL:  gothUser.AvatarURL,
 		Cars:       []models.Car{},
 	}

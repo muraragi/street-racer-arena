@@ -23,7 +23,5 @@ func NewUserHandler(userService services.UserService) UserHandler {
 func (h *userHandler) UserInfo(c *gin.Context) {
 	user := utils.GetCurrentUser(c)
 
-	c.JSON(http.StatusOK, gin.H{
-		"user": user,
-	})
+	c.JSON(http.StatusOK, user)
 }
