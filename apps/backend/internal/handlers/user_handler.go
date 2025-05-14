@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"muraragi/street-racer-arena-backend/internal/services"
-	"muraragi/street-racer-arena-backend/internal/utils"
+	"muraragi/street-racing-arena-backend/internal/services"
+	"muraragi/street-racing-arena-backend/internal/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

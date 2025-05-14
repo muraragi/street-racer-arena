@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"muraragi/street-racer-arena-backend/internal/services"
+	"muraragi/street-racing-arena-backend/internal/services"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

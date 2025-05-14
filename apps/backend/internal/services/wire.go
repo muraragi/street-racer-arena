@@ -1,7 +1,7 @@
 package services
 
 import (
-	"muraragi/street-racer-arena-backend/internal/repositories"
+	"muraragi/street-racing-arena-backend/internal/repositories"
 )
 
 type Services struct {

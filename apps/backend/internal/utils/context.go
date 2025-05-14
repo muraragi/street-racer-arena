@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"muraragi/street-racer-arena-backend/internal/models"
+	"muraragi/street-racing-arena-backend/internal/models"
 
 	"github.com/gin-gonic/gin"
 )

@@ -2,8 +2,8 @@ package services
 
 import (
 	"fmt"
-	"muraragi/street-racer-arena-backend/internal/models"
-	"muraragi/street-racer-arena-backend/internal/repositories"
+	"muraragi/street-racing-arena-backend/internal/models"
+	"muraragi/street-racing-arena-backend/internal/repositories"
 
 	"github.com/markbates/goth"
 )

@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
-	"muraragi/street-racer-arena-backend/internal/models"
+	"muraragi/street-racing-arena-backend/internal/models"
 	"os"
 	"time"
 

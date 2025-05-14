@@ -1,9 +1,9 @@
 package api
 
 import (
-	"muraragi/street-racer-arena-backend/internal/handlers"
-	"muraragi/street-racer-arena-backend/internal/middleware"
-	"muraragi/street-racer-arena-backend/internal/services"
+	"muraragi/street-racing-arena-backend/internal/handlers"
+	"muraragi/street-racing-arena-backend/internal/middleware"
+	"muraragi/street-racing-arena-backend/internal/services"
 
 	"github.com/gin-gonic/gin"
 )

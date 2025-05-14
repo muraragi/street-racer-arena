@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"muraragi/street-racer-arena-backend/internal/api"
-	"muraragi/street-racer-arena-backend/internal/auth"
-	"muraragi/street-racer-arena-backend/internal/database"
-	"muraragi/street-racer-arena-backend/internal/repositories"
-	"muraragi/street-racer-arena-backend/internal/services"
+	"muraragi/street-racing-arena-backend/internal/api"
+	"muraragi/street-racing-arena-backend/internal/auth"
+	"muraragi/street-racing-arena-backend/internal/database"
+	"muraragi/street-racing-arena-backend/internal/repositories"
+	"muraragi/street-racing-arena-backend/internal/services"
 
 	"github.com/joho/godotenv"
 )

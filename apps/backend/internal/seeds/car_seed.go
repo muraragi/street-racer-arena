@@ -3,8 +3,8 @@ package seeds
 import (
 	"log"
 
-	"muraragi/street-racer-arena-backend/internal/database"
-	"muraragi/street-racer-arena-backend/internal/models"
+	"muraragi/street-racing-arena-backend/internal/database"
+	"muraragi/street-racing-arena-backend/internal/models"
 
 	"gorm.io/gorm"
 )

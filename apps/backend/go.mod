@@ -1,4 +1,4 @@
-module muraragi/street-racer-arena-backend
+module muraragi/street-racing-arena-backend
 
 go 1.24.1
 
