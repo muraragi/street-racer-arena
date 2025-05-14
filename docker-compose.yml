@@ -44,7 +44,7 @@ services:
       context: ./apps/frontend  
       dockerfile: Dockerfile
     environment:
-      - NUXT_API_URL=${NUXT_API_URL}
+      - NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL}
     image: muraragi/street-racing-arena-frontend:latest
     container_name: frontend_app
     restart: unless-stopped
