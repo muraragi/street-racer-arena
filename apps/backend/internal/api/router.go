@@ -35,7 +35,7 @@ func InitializeRouter(dependencies RouterDependencies) *gin.Engine {
 
 	store := auth.GetSessionStore()
 
-	router.Use(sessions.Sessions("_gothic_session", store))
+	router.Use(sessions.Sessions("racing_session", store))
 	router.Use(middleware.CurrentUser(dependencies.UserService))
 
 	router.GET("/", func(c *gin.Context) {
