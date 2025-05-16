@@ -4,7 +4,6 @@ export type User = {
   UpdatedAt: string
   DeletedAt?: string | null
   Username: string
-  Email: string
   Provider: string
   ProviderID: string
   AvatarURL: string

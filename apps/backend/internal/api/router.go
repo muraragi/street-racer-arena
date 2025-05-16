@@ -44,9 +44,9 @@ func InitializeRouter(dependencies RouterDependencies) *gin.Engine {
 		})
 	})
 
-	SetupBaseCarRoutes(router, dependencies.BaseCarService)
 	SetupUserRoutes(router, dependencies.UserService)
 	SetupAuthRoutes(router, dependencies.UserService)
+	SetupBaseCarRoutes(router, dependencies.BaseCarService)
 
 	return router
 }

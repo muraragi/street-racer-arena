@@ -86,7 +86,7 @@ const {
           </div>
           <div class="flex flex-col text-gray-400 gap-1">
             <span class="text-2xl font-bold text-primary-foreground">{{ user.Username }}</span>
-            <span class="text-xs mt-1">Mail: {{ user.Email }}</span>
+            <span class="text-xs mt-1">Bio: {{ user.ProfileBio || 'No bio' }}</span>
             <span class="text-xs">Races: {{ user.TotalRaces }}</span>
             <span class="text-xs">Wins: {{ user.RacesWon }}</span>
             <span class="text-xs">Score: {{ user.Score }}</span>
