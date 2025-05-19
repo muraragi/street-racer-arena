@@ -31,6 +31,7 @@ func main() {
 	router := api.InitializeRouter(api.RouterDependencies{
 		BaseCarService: services.BaseCarService,
 		UserService:    services.UserService,
+		CarService:     services.CarService,
 	})
 
 	router.Run(":8080")

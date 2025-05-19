@@ -7,11 +7,13 @@ import (
 type Services struct {
 	BaseCarService BaseCarService
 	UserService    UserService
+	CarService     CarService
 }
 
 func InitializeServices(repositories *repositories.Repositories) *Services {
 	return &Services{
 		BaseCarService: NewBaseCarService(repositories.BaseCarRepository),
 		UserService:    NewUserService(repositories.UserRepository),
+		CarService:     NewCarService(repositories.CarRepository),
 	}
 }
