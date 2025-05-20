@@ -11,6 +11,7 @@ type CarRepository interface {
 	Create(car *models.Car) (*models.Car, error)
 	Update(car *models.Car) (*models.Car, error)
 	Delete(id uint) error
+	GetByID(id uint) (*models.Car, error)
 }
 
 type carRepository struct {
@@ -28,9 +29,17 @@ func (r *carRepository) Create(car *models.Car) (*models.Car, error) {
 	return car, nil
 }
 
+func (r *carRepository) GetByID(id uint) (*models.Car, error) {
+	var car models.Car
+	if err := r.db.Preload("BaseCarModel").First(&car, id).Error; err != nil {
+		return nil, err
+	}
+	return &car, nil
+}
+
 func (r *carRepository) GetAll(userID uint) (*[]models.Car, error) {
 	var cars []models.Car
-	if err := r.db.Where("user_id = ?", userID).Find(&cars).Error; err != nil {
+	if err := r.db.Where("user_id = ?", userID).Preload("BaseCarModel").Find(&cars).Error; err != nil {
 		return nil, err
 	}
 	return &cars, nil

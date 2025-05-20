@@ -12,6 +12,7 @@ type UserRepository interface {
 	FindByEmail(email string) (*models.User, error)
 	Create(user *models.User) (*models.User, error)
 	GetByID(id uint) (*models.User, error)
+	SetSelectedCar(userID uint, carID uint) error
 }
 
 type userRepository struct {
@@ -41,6 +42,10 @@ func (r *userRepository) FindByEmail(email string) (*models.User, error) {
 	return &user, nil
 }
 
+func (r *userRepository) SetSelectedCar(userID uint, carID uint) error {
+	return r.DB.Model(&models.User{}).Where("id = ?", userID).Update("selected_car_id", carID).Error
+}
+
 func (r *userRepository) Create(user *models.User) (*models.User, error) {
 	if err := r.DB.Create(user).Error; err != nil {
 		return nil, err
@@ -50,7 +55,7 @@ func (r *userRepository) Create(user *models.User) (*models.User, error) {
 
 func (r *userRepository) GetByID(id uint) (*models.User, error) {
 	var user models.User
-	if err := r.DB.First(&user, id).Error; err != nil {
+	if err := r.DB.Preload("Cars").First(&user, id).Error; err != nil {
 		return nil, err
 	}
 	return &user, nil

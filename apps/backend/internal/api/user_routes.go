@@ -17,5 +17,6 @@ func SetupUserRoutes(router *gin.Engine, userService services.UserService) {
 	userRoutes.Use(middleware.Auth())
 	{
 		userRoutes.GET("/", userHandler.UserInfo)
+		userRoutes.POST("/selected-car/:car_id", userHandler.SetSelectedCar)
 	}
 }
