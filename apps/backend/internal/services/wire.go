@@ -13,7 +13,7 @@ type Services struct {
 func InitializeServices(repositories *repositories.Repositories) *Services {
 	return &Services{
 		BaseCarService: NewBaseCarService(repositories.BaseCarRepository),
-		UserService:    NewUserService(repositories.UserRepository),
+		UserService:    NewUserService(repositories.UserRepository, repositories.CarRepository),
 		CarService:     NewCarService(repositories.CarRepository),
 	}
 }
