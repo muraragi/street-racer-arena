@@ -33,10 +33,7 @@ func (h *carHandler) AddCar(c *gin.Context) {
 		return
 	}
 
-	var input struct {
-		BaseCarModelID uint   `json:"base_car_model_id" binding:"required"`
-		Nickname       string `json:"nickname"`
-	}
+	input := &models.CarDTO{}
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -79,10 +76,7 @@ func (h *carHandler) UpdateCar(c *gin.Context) {
 		return
 	}
 
-	var input struct {
-		BaseCarModelID uint   `json:"base_car_model_id" binding:"required"`
-		Nickname       string `json:"nickname"`
-	}
+	input := &models.CarDTO{}
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

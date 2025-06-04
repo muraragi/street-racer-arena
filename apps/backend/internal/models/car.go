@@ -41,3 +41,8 @@ type InstalledCarComponent struct {
 	CarComponentID uint         `gorm:"index;not null"`
 	CarComponent   CarComponent `gorm:"foreignKey:CarComponentID"`
 }
+
+type CarDTO struct {
+	BaseCarModelID uint   `json:"baseCarModelId" binding:"required"`
+	Nickname       string `json:"nickname"`
+}
