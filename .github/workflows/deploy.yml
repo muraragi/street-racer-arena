@@ -106,8 +106,7 @@ jobs:
           DEPLOY_PATH: ~/street-racing-arena
         run: |
           echo "Copying docker-compose.yml and Caddyfile..."
-          scp docker-compose.yml ${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}/
-          scp Caddyfile ${SSH_USER}@${SSH_HOST}:/etc/caddy/Caddyfile
+          scp docker-compose.yml Caddyfile ${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}/
 
           echo "Connecting to server and deploying..."
           ssh ${SSH_USER}@${SSH_HOST} << EOF
