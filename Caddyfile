@@ -11,6 +11,16 @@ street-racing-arena.muraragi.com {
     import common_routing
 }
 
+spacetime.muraragi.com {
+    handle_path /v1/database/*/subscribe {
+        reverse_proxy localhost:5413
+    }
+
+    handle_path /v1/identity {
+        reverse_proxy localhost:5413
+    }
+}
+
 localhost {
     import common_routing
 
